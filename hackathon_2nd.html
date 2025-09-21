@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="website_logo.png" type="image/png">
+  <title>Choose Stream</title>
+  <style>
+    /* Popup styling */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.5s ease;
+    }
+    .popup-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: riseUp 0.5s ease;
+    }
+    @keyframes riseUp {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .close-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #56ccf2;
+      color: #fff;
+      cursor: pointer;
+    }
+    .close-btn:hover { background: #2d9cdb; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .stream-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .stream {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 250px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeUp 1.5s ease;
+    }
+    .stream:hover {
+      transform: translateY(-8px);
+      box-shadow: 0px 8px 25px rgba(0,0,0,0.2);
+    }
+    .stream h2 {
+      margin-bottom: 15px;
+      color: #444;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    select:hover {
+      background: #f0f8ff;
+      transform: scale(1.05);
+    }
+    .note {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #555;
+      animation: fadeIn 3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script>
+    let popupShown = false;
+    let currentlySelectedSelect = null;
+
+    window.onload = function () {
+      const popup = document.getElementById('popup');
+      const popupTitle = document.getElementById('popupTitle');
+      const popupStream = document.getElementById('popupStream');
+
+      popupTitle.textContent = "Welcome to Career Streams!";
+      popup.style.display = 'flex';
+    };
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      popupShown = true; // Mark popup as shown so it doesn't show again
+    }
+
+    function showProfession(stream, profession, selectElement) {
+      if (profession === "Select a profession") return;
+
+      // Reset previously selected dropdown if different
+      if (currentlySelectedSelect && currentlySelectedSelect !== selectElement) {
+        currentlySelectedSelect.selectedIndex = 0;
+      }
+
+      currentlySelectedSelect = selectElement;
+
+      // Do NOT show popup after initial load
+      if (!popupShown) {
+        closePopup();
+      }
+
+      // (Optional) Log or show selected profession somewhere if needed
+      console.log(`Selected ${profession} from ${stream}`);
+    }
+  </script>
+</head>
+<body>
+  <h1>Explore Career Options by Stream 🌟</h1>
+  <div class="stream-container">
+    <div class="stream">
+      <h2>Science 🔬</h2>
+      <select onchange="showProfession('Science', this.value, this)">
+        <option>Select a profession</option>
+        <option>Doctor</option>
+        <option>Engineer</option>
+        <option>Pharmacist</option>
+        <option>Biotechnologist</option>
+        <option>Data Scientist</option>
+        <option>Astronomer</option>
+        <option>Environmental Scientist</option>
+        <option>Pilot</option>
+        <option>Forensic Scientist</option>
+        <option>Researcher</option>
+      </select>
+    </div>
+
+    <div class="stream">
+      <h2>Commerce 💼</h2>
+      <select onchange="showProfession('Commerce', this.value, this)">
+        <option>Select a profession</option>
+        <option>Chartered Accountant</option>
+        <option>Investment Banker</option>
+        <option>Business Analyst</option>
+        <option>Company Secretary</option>
+        <option>Financial Planner</option>
+        <option>Entrepreneur</option>
+        <option>Stock Broker</option>
+        <option>Auditor</option>
+        <option>Tax Consultant</option>
+        <option>Economist</option>
+      </select>
+    </div>
+
+    <div class="stream">
+      <h2>Arts 🎨</h2>
+      <select onchange="showProfession('Arts', this.value, this)">
+        <option>Select a profession</option>
+        <option>Journalist</option>
+        <option>Psychologist</option>
+        <option>Teacher</option>
+        <option>Lawyer</option>
+        <option>Historian</option>
+        <option>Graphic Designer</option>
+        <option>Social Worker</option>
+        <option>Actor/Performer</option>
+        <option>Writer/Author</option>
+        <option>Political Scientist</option>
+      </select>
+    </div>
+
+    <div class="stream">
+      <h2>Freelancing 🌍</h2>
+      <select onchange="showProfession('Freelancing', this.value, this)">
+        <option>Select a profession</option>
+        <option>Web Developer</option>
+        <option>Content Writer</option>
+        <option>Graphic Designer</option>
+        <option>Digital Marketer</option>
+        <option>Virtual Assistant</option>
+        <option>Video Editor</option>
+        <option>Translator</option>
+        <option>SEO Specialist</option>
+        <option>App Developer</option>
+        <option>UI/UX Designer</option>
+      </select>
+    </div>
+  </div>
+  <p class="note">Choose a stream and explore the professions you can pursue! 🌱</p>
+
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <h3 id="popupTitle"></h3>
+      <p id="popupStream"></p>
+      <p>There is an exciting career path with many opportunities waiting for you.👍🌟</p>
+      <button class="close-btn" onclick="closePopup()">Okay!!</button>
+    </div>
+  </div>
+</body>
+</html>
